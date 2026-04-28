@@ -51,3 +51,26 @@ Feature: Payment Link
     When the user clicks the "Cancel" action on the active payment request
     Then the payment request status changes to "Cancelled"
     And the linked invoice "INV-26-000010" returns to "Sent" status
+    # ──────────────── Negative Scenarios ────────────────
+
+  @negative
+  Scenario: Submit Create Payment Request with no payment method selected
+    Given a "Sent" invoice "INV-26-000004" exists with no active payment link
+    When I click the "Generate Payment Link" button on invoice "INV-26-000004"
+    And I select "Send Now" as the send timing
+    And I select "7 Days" as the payment link expiration
+    And I leave all payment method checkboxes unchecked
+    And I click "Create Payment Request"
+    Then the form is not submitted
+    And I see an inline validation error "Select at least one payment method."
+
+  @negative
+  Scenario: Submit Create Payment Request with no expiry option selected
+    Given a "Sent" invoice "INV-26-000005" exists with no active payment link
+    When I click the "Generate Payment Link" button on invoice "INV-26-000005"
+    And I select "Send Now" as the send timing
+    And I leave the Payment Link Expiration unselected
+    And I select "Credit Card" as the payment method
+    And I click "Create Payment Request"
+    Then the form is not submitted
+    And I see an inline validation error on the "Payment Link Expiration" field
