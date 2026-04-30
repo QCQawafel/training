@@ -31,3 +31,4 @@ Feature: User Sign Up
     And I click the "Sign Up" button
     Then I should see an error message "Passwords do not match"
     And I should remain on the sign up page
+//comment to merge on github and test rebase 
