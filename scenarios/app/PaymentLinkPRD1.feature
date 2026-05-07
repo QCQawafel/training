@@ -58,10 +58,10 @@ Feature: Create Payment Request
     And I select the "30 Days" expiration option
     And I select the "Credit Card" payment method
     And I select the "Apple Pay" payment method
-    And I click the "Create Payment Request" button
+    And I click the "Create Payment Request" buttons
     Then I should see a success confirmation message
 
-  @positive @create-payment-request @payment-methods
+  @positive @create-payment-request @payment-method
   Scenario: Successfully create a payment request with all payment methods selected
     Given I am logged in and on the create payment request screen
     When I select the "Send Now" option
